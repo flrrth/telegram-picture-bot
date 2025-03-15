@@ -1,0 +1,9 @@
+INSERT INTO picture_bot.timezone ("id", city) VALUES (4, 'Europe/Samara');
+INSERT INTO picture_bot.timezone ("id", city) VALUES (5, 'Asia/Yekaterinburg');
+INSERT INTO picture_bot.timezone ("id", city) VALUES (6, 'Asia/Omsk');
+INSERT INTO picture_bot.timezone ("id", city) VALUES (7, 'Asia/Novosibirsk');
+INSERT INTO picture_bot.timezone ("id", city) VALUES (8, 'Asia/Irkutsk');
+INSERT INTO picture_bot.timezone ("id", city) VALUES (9, 'Asia/Shanghai');
+INSERT INTO picture_bot.timezone ("id", city) VALUES (10, 'Asia/Vladivostok');
+INSERT INTO picture_bot.timezone ("id", city) VALUES (11, 'Asia/Magadan');
+INSERT INTO picture_bot.timezone ("id", city) VALUES (12, 'Asia/Kamchatka');

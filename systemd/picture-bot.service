@@ -1,0 +1,17 @@
+[Unit]
+Description=Telegram Picture Bot Service
+After=network.target
+StartLimitInterval=200
+StartLimitBurst=5
+
+[Service]
+EnvironmentFile=/etc/picture-bot/picture-bot.env
+WorkingDirectory=/opt/picture-bot
+ExecStart=/usr/lib/jvm/java-21-openjdk-amd64/bin/java -Dspring.profiles.active=production -Dspring.datasource.username=${DB_USERNAME} -Dspring.datasource.password=${DB_PASSWORD} -jar /opt/picture-bot/picture-bot.jar
+Restart=on-failure
+RestartSec=30
+User=picturebot
+Group=picturebot
+
+[Install]
+WantedBy=multi-user.target

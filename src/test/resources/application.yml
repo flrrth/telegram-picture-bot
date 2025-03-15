@@ -1,0 +1,39 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:picture-bot;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+    username: sa
+    password: password
+    driverClassName: org.h2.Driver
+  flyway:
+    baselineOnMigrate: true
+    schemas: picture_bot
+  sql:
+    init:
+      platform: h2
+      mode: embedded
+  jpa:
+    show-sql: true
+
+bot:
+  name: picture_bot
+  basePath: /srv/picture-bot/pictures
+  regular:
+    subPath: regular
+  isSpoiler: true
+  randomCommand: /random
+  cache:
+    ids:
+      duration: 1
+    pictures:
+      duration: 60
+    greetings:
+      duration: 1440
+  timezone: Europe/Amsterdam
+
+logging:
+  file:
+    path: /var/log/picture-bot
+  level:
+    org:
+      hibernate:
+        type: warn

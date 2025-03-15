@@ -1,0 +1,67 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/picture-bot
+  flyway:
+    baselineOnMigrate: true
+    schemas: picture_bot
+  sql:
+    init:
+      platform: postgres
+  jpa:
+    show-sql: false
+
+bot:
+  # Name of the bot: (see Telegram's BotFather for the details of your bot)
+  name: daily_pic_bot
+
+  # Base path for the pictures:
+  basePath: /srv/picture-bot/pictures
+
+  # Base path for the 'regular' pictures. Regular pictures are sent when using the random command and when no custom
+  # picture is available:
+  regular:
+    subPath: regular
+
+  # Controls if sent pictures are covered by an overlay:
+  isSpoiler: true
+
+  # The random command. Can be changed to something you prefer, like /picture or /photo:
+  randomCommand: /random
+
+  # Cache settings:
+  cache:
+
+    # Controls the 'cool down' effect for the random command. So 10 seconds means that when a user requests a random
+    # picture, the bot won't send another random picture until the cool down period has passed.
+    ids:
+      duration: 10 # seconds
+
+    # Controls how long the available file names are cached:
+    pictures:
+      duration: 60 # minutes
+
+    # Controls how long the various greetings are cached:
+    greetings:
+      duration: 1440 # minutes
+
+  # The hostname of the server that hosts the HTML-document for the webapp. This server must support SSL:
+  webappHost: your-hostname.com
+
+  # The path to the HTML-document for the webapp:
+  webappPath: /index.html
+
+  # The timezone of the server:
+  timezone: Europe/Amsterdam
+
+  # The directory where pictures uploaded by users are stored:
+  uploads:
+    photos: /srv/picture-bot/uploads
+
+  # The directory where user profile pictures are stored:
+  profile:
+    photos: /srv/picture-bot/profiles
+
+logging:
+  file:
+    # The directory where the log files are stored:
+    path: /var/log/picture-bot
