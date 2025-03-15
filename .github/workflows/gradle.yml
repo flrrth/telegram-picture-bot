@@ -36,12 +36,6 @@ jobs:
     - name: Build with Gradle Wrapper
       run: ./gradlew build
 
-    - name: Run unit tests
-      run: ./gradlew check
-
-    - name: Generate coverage report
-      run: ./gradlew jacocoTestReport
-
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v5
       with:
