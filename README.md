@@ -1,6 +1,7 @@
 # Telegram Picture Bot
 
 [![codecov](https://codecov.io/gh/flrrth/telegram-picture-bot/graph/badge.svg?token=EU0EZ3OGN8)](https://codecov.io/gh/flrrth/telegram-picture-bot)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/01041a85d4d5456a89b1a4cdea8ab45b)](https://app.codacy.com/gh/flrrth/telegram-picture-bot/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
 This is a Telegram bot that allows the user request a random picture. It also offers a simple web page that enables the 
 user to schedule a daily picture. The bot is written in Java 17. It uses:
