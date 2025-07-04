@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
-import org.telegram.telegrambots.meta.bots.AbsSender;
+import org.telegram.telegrambots.meta.generics.TelegramClient;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.nio.file.Path;
@@ -55,7 +55,7 @@ class UniquePhotoCommandImpl implements ScheduledCommand {
     }
 
     @Override
-    public void send(final AbsSender bot, final BotUser botUser) throws TelegramApiException {
+    public void send(final TelegramClient telegramClient, final BotUser botUser) throws TelegramApiException {
         if (botUser.getSettings() == null) {
             LOGGER.warn("User {} has no settings.", botUser.getId());
             return;
@@ -77,7 +77,7 @@ class UniquePhotoCommandImpl implements ScheduledCommand {
                         greetingRetriever.getGreeting(locale, subPath));
 
                 try {
-                    bot.execute(sendPhoto);
+                    telegramClient.execute(sendPhoto);
                 }
                 catch (TelegramApiException e) {
                     if (e.getMessage().contains("[403] Forbidden: bot was blocked by the user")) {
@@ -91,12 +91,12 @@ class UniquePhotoCommandImpl implements ScheduledCommand {
                 }
             }
             else {
-                bot.execute(sendMessageFactory.getNoPictureMessage(botUser.getId(), locale));
+                telegramClient.execute(sendMessageFactory.getNoPictureMessage(botUser.getId(), locale));
             }
         }
         catch (PictureException e) {
             LOGGER.error("Can't read picture.", e);
-            bot.execute(sendMessageFactory.getDefaultErrorMessage(botUser.getId(), locale));
+            telegramClient.execute(sendMessageFactory.getDefaultErrorMessage(botUser.getId(), locale));
         }
     }
 }

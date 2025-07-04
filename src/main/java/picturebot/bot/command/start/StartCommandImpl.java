@@ -6,7 +6,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.User;
-import org.telegram.telegrambots.meta.bots.AbsSender;
+import org.telegram.telegrambots.meta.generics.TelegramClient;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.Locale;
@@ -26,13 +26,13 @@ public class StartCommandImpl implements BotCommand {
     }
 
     @Override
-    public void respond(final AbsSender bot, final Update update) throws TelegramApiException {
+    public void respond(final TelegramClient telegramClient, final Update update) throws TelegramApiException {
         final User user = update.getMessage().getFrom();
         final Locale locale = new Locale.Builder()
                 .setLanguage(update.getMessage().getFrom().getLanguageCode())
                 .build();
 
-        bot.execute(sendMessageFactory.getStartMessage(
+        telegramClient.execute(sendMessageFactory.getStartMessage(
                 user.getId(),
                 locale,
                 new String[]{ user.getFirstName(), environment.getRequiredProperty("bot.randomCommand") })

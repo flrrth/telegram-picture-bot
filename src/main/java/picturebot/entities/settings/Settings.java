@@ -3,7 +3,7 @@ package picturebot.entities.settings;
 import picturebot.entities.botuser.BotUser;
 import picturebot.entities.timezone.Timezone;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Objects;

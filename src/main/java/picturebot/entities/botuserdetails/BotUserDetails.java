@@ -2,7 +2,7 @@ package picturebot.entities.botuserdetails;
 
 import picturebot.entities.botuser.BotUser;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 

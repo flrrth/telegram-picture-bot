@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.bots.AbsSender;
+import org.telegram.telegrambots.meta.generics.TelegramClient;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -58,7 +58,7 @@ public class WebappResponseProcessorCommandImpl implements BotCommand {
      */
     @Override
     @Transactional
-    public void respond(final AbsSender bot, final Update update) throws TelegramApiException {
+    public void respond(final TelegramClient telegramClient, final Update update) throws TelegramApiException {
         try {
             final String dataString = update.getMessage().getWebAppData().getData();
             final WebappData data = webappDataParser.parse(dataString);
@@ -69,7 +69,7 @@ public class WebappResponseProcessorCommandImpl implements BotCommand {
             userRepository.save(botUser);
 
             if (botUser.getSettingsMessageId() != null) {
-                bot.execute(new DeleteMessage(update.getMessage().getFrom().getId().toString(),
+                telegramClient.execute(new DeleteMessage(update.getMessage().getFrom().getId().toString(),
                         botUser.getSettingsMessageId()));
             }
         }
@@ -80,7 +80,7 @@ public class WebappResponseProcessorCommandImpl implements BotCommand {
                     .setLanguage(update.getMessage().getFrom().getLanguageCode())
                     .build();
 
-            bot.execute(sendMessageFactory.getDefaultErrorMessage(update.getMessage().getFrom().getId(), locale));
+            telegramClient.execute(sendMessageFactory.getDefaultErrorMessage(update.getMessage().getFrom().getId(), locale));
         }
     }
 }

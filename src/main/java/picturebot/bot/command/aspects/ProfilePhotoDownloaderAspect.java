@@ -10,10 +10,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
-import org.telegram.telegrambots.bots.DefaultAbsSender;
+import org.telegram.telegrambots.meta.generics.TelegramClient;
 import org.telegram.telegrambots.meta.api.methods.GetFile;
 import org.telegram.telegrambots.meta.api.objects.*;
-import org.telegram.telegrambots.meta.bots.AbsSender;
+import org.telegram.telegrambots.meta.generics.TelegramClient;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.nio.file.FileSystem;
@@ -64,14 +64,14 @@ public class ProfilePhotoDownloaderAspect {
      */
     @After("CommonPointcuts.respondMethodStartCommand()")
     public void respondAdvice(final JoinPoint joinPoint) {
-        final AbsSender bot = (AbsSender) joinPoint.getArgs()[0];
+        final TelegramClient telegramClient = (AbsSender) joinPoint.getArgs()[0];
         final Update update = (Update) joinPoint.getArgs()[1];
 
         if (update.hasMessage()) {
             final User user = update.getMessage().getFrom();
 
             try {
-                final UserProfilePhotos profilePhotos = bot.execute(
+                final UserProfilePhotos profilePhotos = telegramClient.execute(
                         getUserProfilePhotosFactory.createGetUserProfilePhotos(user.getId()));
 
                 profilePhotos.getPhotos().forEach(photoSizeList -> {
@@ -83,13 +83,13 @@ public class ProfilePhotoDownloaderAspect {
                         final GetFile getFileMethod = getFileFactory.createGetFileMethod(photo.getFileId());
 
                         try {
-                            final File file = bot.execute(getFileMethod);
+                            final File file = telegramClient.execute(getFileMethod);
                             final String destinationFolder = fileSystem.getPath(
                                     environment.getRequiredProperty("bot.profile.photos"),
                                     user.getId().toString()).toString();
 
                             telegramFileDownloader.download(
-                                    (DefaultAbsSender) bot,
+                                    (TelegramClient) telegramClient,
                                     update.getMessage().getFrom().getId(),
                                     file,
                                     destinationFolder);

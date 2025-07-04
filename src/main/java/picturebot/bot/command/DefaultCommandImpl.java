@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.bots.AbsSender;
+import org.telegram.telegrambots.meta.generics.TelegramClient;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.Locale;
@@ -35,7 +35,7 @@ public class DefaultCommandImpl implements BotCommand {
      * @throws TelegramApiException thrown when there's a problem with the response
      */
     @Override
-    public void respond(final AbsSender bot, final Update update) throws TelegramApiException {
+    public void respond(final TelegramClient telegramClient, final Update update) throws TelegramApiException {
         final Locale locale = new Locale.Builder()
                 .setLanguage(update.getMessage().getFrom().getLanguageCode())
                 .build();
@@ -44,7 +44,7 @@ public class DefaultCommandImpl implements BotCommand {
                 update.getMessage().getFrom().getId(),
                 update.getMessage().getText());
 
-        bot.execute(sendMessageFactory.getDefaultMessage(
+        telegramClient.execute(sendMessageFactory.getDefaultMessage(
                 update.getMessage().getFrom().getId(),
                 locale,
                 new String[]{ environment.getRequiredProperty("bot.randomCommand") }));

@@ -4,8 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import org.telegram.telegrambots.meta.generics.TelegramClient;
 import picturebot.bot.command.ScheduledCommand;
 import picturebot.entities.botuser.BotUser;
 import picturebot.entities.timezone.Timezone;
@@ -24,17 +24,17 @@ public class Scheduler {
 
     private final ScheduledCommand command;
     private final TimezoneRepository timezoneRepository;
-    private final TelegramLongPollingBot bot;
+    private final TelegramClient telegramClient;
     private final SchedulerService schedulerService;
 
     public Scheduler(final ScheduledCommand command,
                      final TimezoneRepository timezoneRepository,
-                     final TelegramLongPollingBot bot,
+                     final TelegramClient telegramClient,
                      final SchedulerService schedulerService) {
 
         this.command = command;
         this.timezoneRepository = timezoneRepository;
-        this.bot = bot;
+        this.telegramClient = telegramClient;
         this.schedulerService = schedulerService;
     }
 
@@ -53,7 +53,7 @@ public class Scheduler {
         LOGGER.info("Sending daily picture to user {}.", botUser.getId());
 
         try {
-            command.send(bot, botUser);
+            command.send(telegramClient, botUser);
         }
         catch (TelegramApiException e) {
             LOGGER.error("Could not send picture to user {}.", botUser.getId(), e);

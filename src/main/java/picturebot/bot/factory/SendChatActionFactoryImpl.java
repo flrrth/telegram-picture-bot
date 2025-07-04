@@ -16,7 +16,7 @@ public class SendChatActionFactoryImpl implements SendChatActionFactory {
     public SendChatAction getSendChatActionForPhotoUpload(final Long chatId) {
         return SendChatAction.builder()
                 .chatId(chatId)
-                .action(ActionType.UPLOADPHOTO.toString())
+                .action(ActionType.UPLOAD_PHOTO.toString())
                 .build();
     }
 }

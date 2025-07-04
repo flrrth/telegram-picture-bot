@@ -6,7 +6,7 @@ import picturebot.picture.counter.PictureCounter;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.bots.AbsSender;
+import org.telegram.telegrambots.meta.generics.TelegramClient;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.Locale;
@@ -36,13 +36,13 @@ class StatsCommandImpl implements BotCommand {
      * @throws TelegramApiException thrown when there's a problem with the response
      */
     @Override
-    public void respond(final AbsSender bot, final Update update) throws TelegramApiException {
+    public void respond(final TelegramClient telegramClient, final Update update) throws TelegramApiException {
         final int total = pictureCounter.count(environment.getRequiredProperty("bot.regular.subPath"));
         final Locale locale = new Locale.Builder()
                 .setLanguage(update.getMessage().getFrom().getLanguageCode())
                 .build();
 
-        bot.execute(sendMessageFactory.getStatsMessage(update.getMessage().getFrom().getId(), locale,
+        telegramClient.execute(sendMessageFactory.getStatsMessage(update.getMessage().getFrom().getId(), locale,
                 new String[]{ String.valueOf(total) }));
     }
 }

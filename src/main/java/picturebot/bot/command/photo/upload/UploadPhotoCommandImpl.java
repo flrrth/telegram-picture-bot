@@ -6,12 +6,12 @@ import picturebot.bot.factory.GetFileFactory;
 import picturebot.bot.factory.SendMessageFactory;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
-import org.telegram.telegrambots.bots.DefaultAbsSender;
+import org.telegram.telegrambots.meta.generics.TelegramClient;
 import org.telegram.telegrambots.meta.api.methods.GetFile;
 import org.telegram.telegrambots.meta.api.objects.File;
-import org.telegram.telegrambots.meta.api.objects.PhotoSize;
+import org.telegram.telegrambots.meta.api.objects.photo.PhotoSize;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.bots.AbsSender;
+import org.telegram.telegrambots.meta.generics.TelegramClient;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.Comparator;
@@ -47,7 +47,7 @@ class UploadPhotoCommandImpl implements BotCommand {
      * @throws TelegramApiException thrown when there's a problem with the response
      */
     @Override
-    public void respond(final AbsSender bot, final Update update) throws TelegramApiException {
+    public void respond(final TelegramClient telegramClient, final Update update) throws TelegramApiException {
         final Locale locale = new Locale.Builder()
                 .setLanguage(update.getMessage().getFrom().getLanguageCode())
                 .build();
@@ -59,15 +59,15 @@ class UploadPhotoCommandImpl implements BotCommand {
 
         if (photo != null) {
             final GetFile getFileMethod = getFileFactory.createGetFileMethod(photo.getFileId());
-            final File file = bot.execute(getFileMethod);
+            final File file = telegramClient.execute(getFileMethod);
 
-            fileDownloader.download((DefaultAbsSender) bot, update.getMessage().getFrom().getId(), file,
+            fileDownloader.download((TelegramClient) telegramClient, update.getMessage().getFrom().getId(), file,
                     environment.getRequiredProperty("bot.uploads.photos"));
 
-            bot.execute(sendMessageFactory.getUploadConfirmationMessage(update.getMessage().getFrom().getId(), locale));
+            telegramClient.execute(sendMessageFactory.getUploadConfirmationMessage(update.getMessage().getFrom().getId(), locale));
         }
         else {
-            bot.execute(sendMessageFactory.getDefaultErrorMessage(update.getMessage().getFrom().getId(), locale));
+            telegramClient.execute(sendMessageFactory.getDefaultErrorMessage(update.getMessage().getFrom().getId(), locale));
         }
     }
 }

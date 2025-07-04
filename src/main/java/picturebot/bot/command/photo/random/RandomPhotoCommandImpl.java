@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.telegram.telegrambots.meta.api.methods.send.SendChatAction;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.bots.AbsSender;
+import org.telegram.telegrambots.meta.generics.TelegramClient;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.Locale;
@@ -69,7 +69,7 @@ class RandomPhotoCommandImpl implements BotCommand {
      */
     @Override
     @Transactional
-    public void respond(final AbsSender bot, final Update update) throws TelegramApiException {
+    public void respond(final TelegramClient telegramClient, final Update update) throws TelegramApiException {
         final Locale locale = new Locale.Builder()
                 .setLanguage(update.getMessage().getFrom().getLanguageCode())
                 .build();
@@ -79,7 +79,7 @@ class RandomPhotoCommandImpl implements BotCommand {
             final long secondsLeftOnCoolDown = this.userCoolDown.getSecondsLeftOnCoolDown(userId);
 
             if (secondsLeftOnCoolDown > 0) {
-                bot.execute(sendMessageFactory.getCoolDownMessage(userId, locale, secondsLeftOnCoolDown));
+                telegramClient.execute(sendMessageFactory.getCoolDownMessage(userId, locale, secondsLeftOnCoolDown));
             }
             else {
                 final Optional<String> picture = picturePicker.getPicture(
@@ -99,21 +99,21 @@ class RandomPhotoCommandImpl implements BotCommand {
                     incrementRequestCountAndSaveUser(botUser);
 
                     final SendChatAction sendChatAction = sendChatActionFactory.getSendChatActionForPhotoUpload(userId);
-                    bot.execute(sendChatAction);
+                    telegramClient.execute(sendChatAction);
 
                     final SendPhoto sendPhoto = sendPhotoFactory.getSendPhoto(userId,
                             inputFileFactory.getInputFile(picture.get()), hasSpoiler);
 
-                    bot.execute(sendPhoto);
+                    telegramClient.execute(sendPhoto);
                 }
                 else {
-                    bot.execute(sendMessageFactory.getNoPictureMessage(userId, locale));
+                    telegramClient.execute(sendMessageFactory.getNoPictureMessage(userId, locale));
                 }
             }
         }
         catch (PictureException e) {
             LOGGER.error("Can't read picture.", e);
-            bot.execute(sendMessageFactory.getDefaultErrorMessage(userId, locale));
+            telegramClient.execute(sendMessageFactory.getDefaultErrorMessage(userId, locale));
         }
     }
 
