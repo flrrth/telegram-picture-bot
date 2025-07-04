@@ -75,7 +75,7 @@ public class PictureBotImpl implements SpringLongPollingBot, PictureBot {
         return this::handleUpdates;
     }
 
-    private void handleUpdates(List<Update> updates) {
+    private void handleUpdates(final List<Update> updates) {
         for (Update update : updates) {
             onUpdateReceived(update);
         }
