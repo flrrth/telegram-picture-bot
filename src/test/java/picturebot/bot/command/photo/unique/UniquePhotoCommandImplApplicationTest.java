@@ -15,7 +15,7 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.util.FileSystemUtils;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
-import org.telegram.telegrambots.meta.bots.AbsSender;
+import org.telegram.telegrambots.meta.generics.TelegramClient;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.io.IOException;
@@ -43,7 +43,7 @@ public class UniquePhotoCommandImplApplicationTest {
     @Autowired private Path mockedBasePath;
     @Autowired private Environment environment;
     @Autowired private JdbcTemplate jdbcTemplate;
-    @Autowired private AbsSender bot;
+    @Autowired private TelegramClient telegramClient;
 
     private BotUser botUser;
 

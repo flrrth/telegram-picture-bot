@@ -22,20 +22,20 @@ public class SettingsReplyKeyboardMarkupFactoryImpl implements SettingsReplyKeyb
 
     @Override
     public ReplyKeyboardMarkup create(final String url, final Locale locale) {
-        final KeyboardButton keyboardButton = new KeyboardButton();
-        keyboardButton.setText(messageSource.getMessage("keyboardButton.settings", null, locale));
-        keyboardButton.setWebApp(new WebAppInfo(url));
-
-        final ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
-        replyKeyboardMarkup.setResizeKeyboard(true);
-        replyKeyboardMarkup.setOneTimeKeyboard(true);
+        final KeyboardButton keyboardButton = KeyboardButton.builder()
+                .text(messageSource.getMessage("keyboardButton.settings", null, locale))
+                .webApp(WebAppInfo.builder().url(url).build())
+                .build();
 
         final List<KeyboardRow> rows = new ArrayList<>();
         final KeyboardRow row = new KeyboardRow();
         row.add(keyboardButton);
         rows.add(row);
-        replyKeyboardMarkup.setKeyboard(rows);
 
-        return replyKeyboardMarkup;
+        return ReplyKeyboardMarkup.builder()
+                .keyboard(rows)
+                .resizeKeyboard(true)
+                .oneTimeKeyboard(true)
+                .build();
     }
 }

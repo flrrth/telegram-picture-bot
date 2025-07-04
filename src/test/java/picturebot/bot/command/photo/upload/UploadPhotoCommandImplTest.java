@@ -17,10 +17,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.core.env.Environment;
-import org.telegram.telegrambots.bots.DefaultAbsSender;
+import org.telegram.telegrambots.meta.generics.TelegramClient;
 import org.telegram.telegrambots.meta.api.methods.GetFile;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.PhotoSize;
+import org.telegram.telegrambots.meta.api.objects.photo.PhotoSize;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
@@ -35,7 +35,7 @@ class UploadPhotoCommandImplTest {
 
     @Mock private PhotoSize photoSize1;
     @Mock private PhotoSize photoSize2;
-    final private DefaultAbsSender bot = mock(DefaultAbsSender.class);
+    final private DefaultTelegramClient telegramClient = mock(DefaultAbsSender.class);
     @Mock private org.telegram.telegrambots.meta.api.objects.File telegramFile;
     @Mock private File downloadedFile;
     @Mock private SendMessageFactory sendMessageFactory;

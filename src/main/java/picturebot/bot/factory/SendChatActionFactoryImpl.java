@@ -9,7 +9,7 @@ public class SendChatActionFactoryImpl implements SendChatActionFactory {
 
     @Override
     public SendChatAction getSendChatAction() {
-        return new SendChatAction();
+        return SendChatAction.builder().build();
     }
 
     @Override

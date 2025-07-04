@@ -8,7 +8,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.mock.env.MockEnvironment;
-import org.telegram.telegrambots.meta.bots.AbsSender;
+import org.telegram.telegrambots.meta.generics.TelegramClient;
 
 import java.nio.file.FileSystem;
 import java.nio.file.Path;
@@ -61,5 +61,5 @@ public class DailyPictureBotTestConfiguration {
     public Scheduler scheduler;
 
     @MockBean
-    public AbsSender bot;
+    public TelegramClient telegramClient;
 }

@@ -26,7 +26,7 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.bots.AbsSender;
+import org.telegram.telegrambots.meta.generics.TelegramClient;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import picturebot.bot.factory.InputFileFactory;
@@ -57,7 +57,7 @@ class RandomPhotoCommandImplTest {
     @Mock private SendMessage sendMessage;
     @Mock private SendPhoto sendPhoto;
     @Mock private UserRepository userRepository;
-    @Mock private AbsSender bot;
+    @Mock private TelegramClient telegramClient;
 
     @InjectMocks private RandomPhotoCommandImpl randomPhotoCommand;
 

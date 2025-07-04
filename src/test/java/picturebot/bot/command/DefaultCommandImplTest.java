@@ -21,7 +21,7 @@ import org.springframework.boot.test.system.OutputCaptureExtension;
 import org.springframework.core.env.Environment;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.bots.AbsSender;
+import org.telegram.telegrambots.meta.generics.TelegramClient;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import picturebot.bot.factory.SendMessageFactory;
@@ -33,7 +33,7 @@ class DefaultCommandImplTest {
 
     @Mock private SendMessageFactory sendMessageFactory;
     @Mock private SendMessage sendMessage;
-    @Mock private AbsSender bot;
+    @Mock private TelegramClient telegramClient;
     @Mock private Environment environment;
 
     @InjectMocks private DefaultCommandImpl command;

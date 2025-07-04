@@ -13,8 +13,8 @@ class GetFileFactoryImpl implements GetFileFactory {
      */
     @Override
     public GetFile createGetFileMethod(final String fileId) {
-        final GetFile getFileMethod = new GetFile();
-        getFileMethod.setFileId(fileId);
-        return getFileMethod;
+        return GetFile.builder()
+                .fileId(fileId)
+                .build();
     }
 }

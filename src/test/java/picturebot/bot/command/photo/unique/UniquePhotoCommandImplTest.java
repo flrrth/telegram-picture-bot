@@ -28,7 +28,7 @@ import org.springframework.boot.test.system.OutputCaptureExtension;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
-import org.telegram.telegrambots.meta.bots.AbsSender;
+import org.telegram.telegrambots.meta.generics.TelegramClient;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import picturebot.bot.factory.InputFileFactory;
@@ -62,7 +62,7 @@ class UniquePhotoCommandImplTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS) BotUser botUser;
     @Mock private SendMessage sendMessage;
     @Mock private SendPhoto sendPhoto;
-    @Mock private AbsSender bot;
+    @Mock private TelegramClient telegramClient;
     @Mock private Timezone timezone;
 
     @Nested

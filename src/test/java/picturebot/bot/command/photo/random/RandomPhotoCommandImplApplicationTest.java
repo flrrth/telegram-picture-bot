@@ -21,7 +21,7 @@ import org.springframework.util.FileSystemUtils;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.bots.AbsSender;
+import org.telegram.telegrambots.meta.generics.TelegramClient;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.io.IOException;
@@ -46,7 +46,7 @@ public class RandomPhotoCommandImplApplicationTest {
     @Autowired private Path mockedBasePath;
     @Autowired private Environment environment;
     @Autowired private JdbcTemplate jdbcTemplate;
-    @Autowired private AbsSender bot;
+    @Autowired private TelegramClient telegramClient;
 
     @Captor private ArgumentCaptor<SendPhoto> sendPhotoArgumentCaptor;
     @Captor private ArgumentCaptor<SendMessage> sendMessageArgumentCaptor;

@@ -16,7 +16,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.util.FileSystemUtils;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.bots.AbsSender;
+import org.telegram.telegrambots.meta.generics.TelegramClient;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.io.IOException;
@@ -36,7 +36,7 @@ public class StatsCommandImplApplicationTest {
     @Autowired private StatsCommandImpl statsCommandImpl;
     @Autowired private Path mockedBasePath;
     @Autowired private Environment environment;
-    @Autowired private AbsSender bot;
+    @Autowired private TelegramClient telegramClient;
 
     @Captor private ArgumentCaptor<SendMessage> sendMessageArgumentCaptor;
 

@@ -17,7 +17,7 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.bots.AbsSender;
+import org.telegram.telegrambots.meta.generics.TelegramClient;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -37,7 +37,7 @@ import static org.mockito.Mockito.verify;
 public class DefaultCommandImplApplicationTest {
 
     @Autowired private DefaultCommandImpl defaultCommandImpl;
-    @Autowired private AbsSender bot;
+    @Autowired private TelegramClient telegramClient;
 
     @Captor private ArgumentCaptor<SendMessage> sendMessageArgumentCaptor;
 

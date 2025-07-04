@@ -18,7 +18,7 @@ import org.telegram.telegrambots.meta.api.methods.GetUserProfilePhotos;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.UserProfilePhotos;
-import org.telegram.telegrambots.meta.bots.AbsSender;
+import org.telegram.telegrambots.meta.generics.TelegramClient;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.List;
@@ -33,7 +33,7 @@ import static org.mockito.Mockito.*;
 public class StartCommandImplApplicationTest {
 
     @Autowired private StartCommandImpl startCommand;
-    @Autowired private AbsSender bot;
+    @Autowired private TelegramClient telegramClient;
 
     @MockBean private GetUserProfilePhotosFactory getUserProfilePhotosFactory;
     

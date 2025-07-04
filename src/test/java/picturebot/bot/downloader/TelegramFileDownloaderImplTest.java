@@ -10,7 +10,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.system.CapturedOutput;
 import org.springframework.boot.test.system.OutputCaptureExtension;
-import org.telegram.telegrambots.bots.DefaultAbsSender;
+import org.telegram.telegrambots.meta.generics.TelegramClient;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.io.File;
@@ -26,7 +26,7 @@ import static org.mockito.Mockito.when;
 @Tag("unit")
 class TelegramFileDownloaderImplTest {
 
-    @Mock private DefaultAbsSender bot = mock(DefaultAbsSender.class);
+    @Mock private DefaultTelegramClient telegramClient = mock(DefaultAbsSender.class);
     @Mock private org.telegram.telegrambots.meta.api.objects.File telegramFile;
     @Mock private File downloadFile;
 

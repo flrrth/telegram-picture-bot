@@ -26,94 +26,94 @@ public class SendMessageFactoryImpl implements SendMessageFactory {
 
     @Override
     public SendMessage getSendMessage() {
-        return new SendMessage();
+        return SendMessage.builder().build();
     }
 
     @Override
     public SendMessage getDefaultErrorMessage(final Long chatId, final Locale locale) {
-        return new SendMessage(
-                chatId.toString(),
-                String.format(messageSource.getMessage("error", null, locale),
-                        FACE_WITH_OPEN_MOUTH_AND_COLD_SWEAT)
-        );
+        return SendMessage.builder()
+                .chatId(chatId.toString())
+                .text(String.format(messageSource.getMessage("error", null, locale),
+                        FACE_WITH_OPEN_MOUTH_AND_COLD_SWEAT))
+                .build();
     }
 
     @Override
     public SendMessage getNoPictureMessage(final Long chatId, final Locale locale) {
-        return new SendMessage(
-                chatId.toString(),
-                String.format(messageSource.getMessage("noPictures", null, locale),
-                        FACE_WITH_OPEN_MOUTH_AND_COLD_SWEAT)
-        );
+        return SendMessage.builder()
+                .chatId(chatId.toString())
+                .text(String.format(messageSource.getMessage("noPictures", null, locale),
+                        FACE_WITH_OPEN_MOUTH_AND_COLD_SWEAT))
+                .build();
     }
 
     @Override
     public SendMessage getHelpMessage(final Long chatId, final Locale locale) {
-        return new SendMessage(
-                chatId.toString(),
-                String.format(messageSource.getMessage("help", null, locale),
-                        WHITE_DOWN_POINTING_BACKHAND_INDEX)
-        );
+        return SendMessage.builder()
+                .chatId(chatId.toString())
+                .text(String.format(messageSource.getMessage("help", null, locale),
+                        WHITE_DOWN_POINTING_BACKHAND_INDEX))
+                .build();
     }
 
     @Override
     public SendMessage getStatsMessage(final Long chatId, final Locale locale, final String[] values) {
-        return new SendMessage(
-                chatId.toString(),
-                String.format(messageSource.getMessage("stats.pictureCount", values, locale), ARTIST_PALETTE)
-        );
+        return SendMessage.builder()
+                .chatId(chatId.toString())
+                .text(String.format(messageSource.getMessage("stats.pictureCount", values, locale), ARTIST_PALETTE))
+                .build();
     }
 
     @Override
     public SendMessage getDefaultMessage(final Long chatId, final Locale locale, final String[] values) {
-        return new SendMessage(
-                chatId.toString(),
-                String.format(messageSource.getMessage("default", values, locale),
+        return SendMessage.builder()
+                .chatId(chatId.toString())
+                .text(String.format(messageSource.getMessage("default", values, locale),
                         FACE_WITH_OPEN_MOUTH_AND_COLD_SWEAT,
                         WHITE_RIGHT_POINTING_BACKHAND_INDEX,
                         WHITE_RIGHT_POINTING_BACKHAND_INDEX,
                         WHITE_RIGHT_POINTING_BACKHAND_INDEX,
-                        WHITE_RIGHT_POINTING_BACKHAND_INDEX)
-        );
+                        WHITE_RIGHT_POINTING_BACKHAND_INDEX))
+                .build();
     }
 
     @Override
     public SendMessage getStartMessage(final Long chatId, final Locale locale, final String[] values) {
-        return new SendMessage(
-                chatId.toString(),
-                String.format(
+        return SendMessage.builder()
+                .chatId(chatId.toString())
+                .text(String.format(
                         messageSource.getMessage("start", values, locale),
                         WAVING_HAND_SIGN,
                         WHITE_RIGHT_POINTING_BACKHAND_INDEX,
-                        WHITE_RIGHT_POINTING_BACKHAND_INDEX)
-        );
+                        WHITE_RIGHT_POINTING_BACKHAND_INDEX))
+                .build();
     }
 
     @Override
     public SendMessage getCoolDownMessage(final Long chatId, final Locale locale, final long secondsLeftOnCoolDown) {
-        return new SendMessage(
-                chatId.toString(),
-                String.format(
+        return SendMessage.builder()
+                .chatId(chatId.toString())
+                .text(String.format(
                         messageSource.getMessage("coolDown",
                                 new String[]{ cooldownTextFormatter.format(secondsLeftOnCoolDown, locale) },
                                 locale),
-                        RAISED_HAND)
-        );
+                        RAISED_HAND))
+                .build();
     }
 
     @Override
     public SendMessage getUploadConfirmationMessage(final Long chatId, final Locale locale) {
-        return new SendMessage(
-                chatId.toString(),
-                String.format(messageSource.getMessage("upload.thanks", null, locale), HEAVY_BLACK_HEART)
-        );
+        return SendMessage.builder()
+                .chatId(chatId.toString())
+                .text(String.format(messageSource.getMessage("upload.thanks", null, locale), HEAVY_BLACK_HEART))
+                .build();
     }
 
     @Override
     public SendMessage getVersionMessage(final Long chatId, final Locale locale, final String[] values) {
-        return new SendMessage(
-                chatId.toString(),
-                String.format(messageSource.getMessage("version", values, locale), ROCKET)
-        );
+        return SendMessage.builder()
+                .chatId(chatId.toString())
+                .text(String.format(messageSource.getMessage("version", values, locale), ROCKET))
+                .build();
     }
 }

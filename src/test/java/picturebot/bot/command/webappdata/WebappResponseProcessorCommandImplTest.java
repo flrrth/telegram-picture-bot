@@ -24,7 +24,7 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.webapp.WebAppData;
-import org.telegram.telegrambots.meta.bots.AbsSender;
+import org.telegram.telegrambots.meta.generics.TelegramClient;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -45,7 +45,7 @@ class WebappResponseProcessorCommandImplTest {
     @Mock private TimezoneRepository timezoneRepository;
     @Mock private UserRepository userRepository;
     @Mock private SettingsUpdater settingsUpdater;
-    @Mock private AbsSender bot;
+    @Mock private TelegramClient telegramClient;
     @Mock private SendMessageFactory sendMessageFactory;
     @Mock private SendMessage sendMessage;
     @Mock private BotUser botUser;

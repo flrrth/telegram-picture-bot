@@ -14,11 +14,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.system.CapturedOutput;
 import org.springframework.boot.test.system.OutputCaptureExtension;
 import org.springframework.core.env.Environment;
-import org.telegram.telegrambots.bots.DefaultAbsSender;
+import org.telegram.telegrambots.meta.generics.TelegramClient;
 import org.telegram.telegrambots.meta.api.methods.GetFile;
 import org.telegram.telegrambots.meta.api.methods.GetUserProfilePhotos;
 import org.telegram.telegrambots.meta.api.objects.*;
-import org.telegram.telegrambots.meta.bots.AbsSender;
+import org.telegram.telegrambots.meta.generics.TelegramClient;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.nio.file.FileSystem;
@@ -41,7 +41,7 @@ class ProfilePhotoDownloaderAspectTest {
     @InjectMocks private ProfilePhotoDownloaderAspect profilePhotoDownloaderAspect;
 
     @Mock private JoinPoint joinPoint;
-    final private AbsSender bot = mock(DefaultAbsSender.class);
+    final private TelegramClient telegramClient = mock(DefaultAbsSender.class);
     @Mock(answer = Answers.RETURNS_DEEP_STUBS) private Update update;
     @Mock private User user;
     @Mock private GetUserProfilePhotos getUserProfilePhotos;

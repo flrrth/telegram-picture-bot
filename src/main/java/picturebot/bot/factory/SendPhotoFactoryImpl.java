@@ -10,7 +10,7 @@ public class SendPhotoFactoryImpl implements SendPhotoFactory {
 
     @Override
     public SendPhoto getSendPhoto() {
-        return new SendPhoto();
+        return SendPhoto.builder().build();
     }
 
     @Override

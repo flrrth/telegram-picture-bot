@@ -16,10 +16,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.message.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
-import org.telegram.telegrambots.meta.bots.AbsSender;
+import org.telegram.telegrambots.meta.generics.TelegramClient;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import picturebot.bot.factory.SettingsReplyKeyboardMarkupFactory;
@@ -33,7 +33,7 @@ import picturebot.repositories.UserRepository;
 @Tag("unit")
 class SettingsCommandImplTest {
 
-    @Mock private AbsSender bot;
+    @Mock private TelegramClient telegramClient;
     @Mock private UserRepository userRepository;
     @Mock private BotUser botUser;
     @Mock private Settings settings;

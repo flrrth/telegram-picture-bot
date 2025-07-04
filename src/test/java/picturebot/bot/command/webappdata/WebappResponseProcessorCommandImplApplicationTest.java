@@ -26,7 +26,7 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.webapp.WebAppData;
-import org.telegram.telegrambots.meta.bots.AbsSender;
+import org.telegram.telegrambots.meta.generics.TelegramClient;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.time.LocalTime;
@@ -59,7 +59,7 @@ public class WebappResponseProcessorCommandImplApplicationTest {
         @Test
         @DisplayName("should update the user settings with the values received from the web application")
         void shouldUpdateTheUserSettingsWithTheValuesReceivedFromTheWebApplication() throws TelegramApiException {
-            final AbsSender bot = Mockito.mock(AbsSender.class);
+            final TelegramClient telegramClient = Mockito.mock(AbsSender.class);
             final Update update = UpdateFixture.createBasicUpdate("en");
             update.getMessage().setWebAppData(new WebAppData());
             update.getMessage().getWebAppData().setData("""
@@ -92,7 +92,7 @@ public class WebappResponseProcessorCommandImplApplicationTest {
         @Test
         @DisplayName("should respond with an error message when the data received from the web application is invalid")
         void shouldRespondWithAnErrorMessageWhenTheDataReceivedFromTheWebApplicationIsInvalid(final CapturedOutput output) throws TelegramApiException {
-            final AbsSender bot = Mockito.mock(AbsSender.class);
+            final TelegramClient telegramClient = Mockito.mock(AbsSender.class);
             final Update update = UpdateFixture.createBasicUpdate("en");
             update.getMessage().setWebAppData(new WebAppData());
             update.getMessage().getWebAppData().setData("invalid data");

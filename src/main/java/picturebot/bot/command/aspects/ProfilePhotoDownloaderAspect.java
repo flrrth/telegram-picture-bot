@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.generics.TelegramClient;
 import org.telegram.telegrambots.meta.api.methods.GetFile;
 import org.telegram.telegrambots.meta.api.objects.*;
+import org.telegram.telegrambots.meta.api.objects.photo.PhotoSize;
 import org.telegram.telegrambots.meta.generics.TelegramClient;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
@@ -64,7 +65,7 @@ public class ProfilePhotoDownloaderAspect {
      */
     @After("CommonPointcuts.respondMethodStartCommand()")
     public void respondAdvice(final JoinPoint joinPoint) {
-        final TelegramClient telegramClient = (AbsSender) joinPoint.getArgs()[0];
+        final TelegramClient telegramClient = (TelegramClient) joinPoint.getArgs()[0];
         final Update update = (Update) joinPoint.getArgs()[1];
 
         if (update.hasMessage()) {
